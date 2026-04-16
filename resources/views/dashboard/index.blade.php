@@ -89,87 +89,99 @@
     <div class="container mx-auto px-4 py-6 max-w-7xl">
         <!-- Header -->
         <header class="mb-8 fade-in">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
-                            <i class="fas fa-calendar-check text-white text-lg"></i>
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 gradient-bg rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-calendar-check text-white text-xl"></i>
                         </div>
                         <div>
-                            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Dashboard Absensi</h1>
-                            <p class="text-gray-600 text-sm">Smart Attendance Management System</p>
+                            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 tracking-tight">Dashboard
+                                Absensi</h1>
+                            <p class="text-gray-500 text-xs md:text-sm font-medium uppercase tracking-wider">Smart
+                                Attendance System</p>
                         </div>
                     </div>
 
-                    <div class="mt-4 flex flex-wrap items-center gap-4">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user text-blue-600 text-sm"></i>
+                    <div
+                        class="flex flex-nowrap md:flex-wrap items-center gap-3 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                        <div
+                            class="flex items-center gap-2 bg-blue-50 px-3 py-2 rounded-full flex-shrink-0 border border-blue-100">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-white text-[10px]"></i>
                             </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Selamat datang</p>
-                                <p class="font-semibold text-gray-800">{{ Auth::user()->name }}</p>
-                            </div>
+                            <span
+                                class="text-xs font-semibold text-blue-700 whitespace-nowrap">{{ Auth::user()->name }}</span>
                         </div>
 
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-calendar-day text-green-600 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Hari ini</p>
-                                <p class="font-semibold text-gray-800">{{ now()->format('d F Y') }}</p>
-                            </div>
+                        <div
+                            class="flex items-center gap-2 bg-green-50 px-3 py-2 rounded-full flex-shrink-0 border border-green-100">
+                            <i class="fas fa-calendar-day text-green-600 text-xs"></i>
+                            <span
+                                class="text-xs font-semibold text-green-700 whitespace-nowrap">{{ now()->translatedFormat('d M Y') }}</span>
                         </div>
 
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-clock text-purple-600 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Waktu sekarang</p>
-                                <p id="waktu-sekarang" class="font-bold text-purple-600">{{ now()->format('H:i:s') }}
-                                </p>
-                            </div>
+                        <div
+                            class="flex items-center gap-2 bg-purple-50 px-3 py-2 rounded-full flex-shrink-0 border border-purple-100">
+                            <i class="fas fa-clock text-purple-600 text-xs"></i>
+                            <span id="waktu-sekarang"
+                                class="text-xs font-bold text-purple-700 whitespace-nowrap">{{ now()->format('H:i:s') }}</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3">
+                <div
+                    class="flex items-center justify-between md:justify-end gap-3 bg-white md:bg-transparent p-2 md:p-0 rounded-2xl shadow-sm md:shadow-none border border-gray-100 md:border-none">
+
                     <button onclick="showNotification()"
-                        class="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full">
+                        class="relative p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 group">
                         <i class="fas fa-bell text-xl"></i>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        <span
+                            class="absolute top-2 right-2.5 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full"></span>
                     </button>
 
                     <div class="relative group">
                         <button
-                            class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm hover:shadow transition-shadow">
-                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center">
-                                <span
-                                    class="text-white font-semibold text-sm">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                            class="flex items-center gap-3 pl-2 pr-4 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all border border-gray-200">
+                            <div class="w-9 h-9 gradient-bg rounded-lg flex items-center justify-center shadow-sm">
+                                <span class="text-white font-bold text-sm">{{ substr(Auth::user()->name, 0, 1) }}</span>
                             </div>
-                            <span
-                                class="hidden md:inline text-gray-700 font-medium">{{ explode(' ', Auth::user()->name)[0] }}</span>
-                            <i class="fas fa-chevron-down text-gray-400 text-sm"></i>
+                            <div class="hidden sm:block text-left">
+                                <p class="text-xs text-gray-500 leading-none mb-1">Account</p>
+                                <p class="text-sm font-bold text-gray-800 leading-none">
+                                    {{ explode(' ', Auth::user()->name)[0] }}</p>
+                            </div>
+                            <i
+                                class="fas fa-chevron-down text-gray-400 text-[10px] ml-1 group-hover:rotate-180 transition-transform"></i>
                         </button>
 
                         <div
-                            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">
-                                <i class="fas fa-user mr-2"></i>Profile
-                            </a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">
-                                <i class="fas fa-cog mr-2"></i>Settings
-                            </a>
-                            <hr class="my-1">
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                                </button>
-                            </form>
+                            class="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <div class="px-4 py-3 border-b border-gray-50">
+                                <p class="text-sm font-bold text-gray-800">{{ Auth::user()->name }}</p>
+                                <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                            </div>
+                            <div class="p-1">
+                                <a href="#"
+                                    class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                    <i class="fas fa-user-circle w-5"></i> Profil Saya
+                                </a>
+                                <a href="#"
+                                    class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                    <i class="fas fa-cog w-5"></i> Pengaturan
+                                </a>
+                            </div>
+                            <div class="p-1 border-t border-gray-50">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        class="flex w-full items-center gap-3 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors font-semibold">
+                                        <i class="fas fa-sign-out-alt w-5"></i> Keluar
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -353,7 +365,8 @@
                             <div class="flex items-center gap-2 text-gray-600">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>
-                                    Pulang: Setelah {{ \Carbon\Carbon::parse($sesiHariIni->jam_selesai)->format('H:i') }}
+                                    Pulang: Setelah
+                                    {{ \Carbon\Carbon::parse($sesiHariIni->jam_selesai)->format('H:i') }}
                                     @if ($sesiHariIni->maksimal_jam_pulang)
                                         - {{ \Carbon\Carbon::parse($sesiHariIni->maksimal_jam_pulang)->format('H:i') }}
                                     @else
@@ -410,7 +423,7 @@
                                 <i class="fas fa-exclamation-circle mr-1"></i>
                                 Tidak bisa absen pulang
                             </p>
-                            
+
                         </div>
                     @endif
                 </div>
@@ -418,6 +431,143 @@
         </div>
 
         <!-- Main Content Grid -->
+
+
+        <!-- Attendance History Table -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-8 fade-in">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-gray-800">Riwayat Absensi</h2>
+                    <div class="flex items-center space-x-2">
+                        <button
+                            class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
+                            <i class="fas fa-filter mr-1"></i>Filter
+                        </button>
+                        <button
+                            class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
+                            <i class="fas fa-download mr-1"></i>Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Tanggal</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Masuk</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Pulang</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Durasi</th>
+                            {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status</th> --}}
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Bukti</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        @foreach ($riwayatAbsensi as $absensi)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        {{ $absensi->tanggal->format('d/m/Y') }}</div>
+                                    <div class="text-sm text-gray-500">{{ $absensi->tanggal->format('l') }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-sign-in-alt text-gray-400 mr-2"></i>
+                                        <span
+                                            class="text-sm font-medium {{ $absensi->jam_masuk ? 'text-gray-900' : 'text-gray-400' }}">
+                                            {{ $absensi->jam_masuk ?: 'Tidak ada' }}
+                                        </span>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 text-xs rounded-full font-medium 
+                                    {{ $absensi->status_masuk == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                        {{ $absensi->status_masuk == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-sign-out-alt text-gray-400 mr-2"></i>
+                                        <span
+                                            class="text-sm font-medium {{ $absensi->jam_pulang ? 'text-gray-900' : 'text-gray-400' }}">
+                                            {{ $absensi->jam_pulang ?: 'Tidak ada' }}
+                                        </span>
+                                    </div>
+
+                                    <span
+                                        class="px-3 py-1 text-xs rounded-full font-medium 
+                                    {{ $absensi->status_pulang == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                        {{ $absensi->status_pulang == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        @if ($absensi->jam_masuk && $absensi->jam_pulang)
+                                            @php
+                                                $start = \Carbon\Carbon::parse($absensi->jam_masuk);
+                                                $end = \Carbon\Carbon::parse($absensi->jam_pulang);
+                                                $duration = $start->diff($end);
+                                            @endphp
+                                            {{ $duration->h }}h {{ $duration->i }}m
+                                        @else
+                                            -
+                                        @endif
+                                    </div>
+                                </td>
+                                {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="px-3 py-1 text-xs rounded-full font-medium 
+                                    {{ $absensi->status_masuk == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                        {{ $absensi->status_masuk == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
+                                    </span>
+                                </td> --}}
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if ($absensi->bukti_diupload)
+                                        <div class="flex items-center text-green-600">
+                                            <i class="fas fa-check-circle mr-1"></i>
+                                            <span class="text-sm">Uploaded</span>
+                                        </div>
+                                    @else
+                                        <div class="flex items-center text-gray-400">
+                                            <i class="fas fa-times-circle mr-1"></i>
+                                            <span class="text-sm">Belum</span>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900 mr-3">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    @if ($absensi->bukti_pekerjaan)
+                                        <a href="{{ asset('storage/' . $absensi->bukti_pekerjaan) }}" target="_blank"
+                                            class="text-purple-600 hover:text-purple-900">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            @if ($riwayatAbsensi->isEmpty())
+                <div class="text-center py-12">
+                    <i class="fas fa-calendar-times text-gray-300 text-5xl mb-4"></i>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak ada riwayat absensi</h3>
+                    <p class="text-gray-500">Riwayat absensi akan muncul setelah Anda melakukan absensi</p>
+                </div>
+            @endif
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 fade-in">
             <!-- Left Column: Attendance Actions & Session Info -->
             <div class="lg:col-span-2 space-y-8">
@@ -723,142 +873,6 @@
 
             </div>
         </div>
-
-        <!-- Attendance History Table -->
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-8 fade-in">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-bold text-gray-800">Riwayat Absensi</h2>
-                    <div class="flex items-center space-x-2">
-                        <button
-                            class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
-                            <i class="fas fa-filter mr-1"></i>Filter
-                        </button>
-                        <button
-                            class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
-                            <i class="fas fa-download mr-1"></i>Export
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Tanggal</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Masuk</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Pulang</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Durasi</th>
-                            {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Status</th> --}}
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Bukti</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        @foreach ($riwayatAbsensi as $absensi)
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        {{ $absensi->tanggal->format('d/m/Y') }}</div>
-                                    <div class="text-sm text-gray-500">{{ $absensi->tanggal->format('l') }}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-sign-in-alt text-gray-400 mr-2"></i>
-                                        <span
-                                            class="text-sm font-medium {{ $absensi->jam_masuk ? 'text-gray-900' : 'text-gray-400' }}">
-                                            {{ $absensi->jam_masuk ?: 'Tidak ada' }}
-                                        </span>
-                                    </div>
-                                    <span
-                                        class="px-3 py-1 text-xs rounded-full font-medium 
-                                    {{ $absensi->status_masuk == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                                        {{ $absensi->status_masuk == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-sign-out-alt text-gray-400 mr-2"></i>
-                                        <span
-                                            class="text-sm font-medium {{ $absensi->jam_pulang ? 'text-gray-900' : 'text-gray-400' }}">
-                                            {{ $absensi->jam_pulang ?: 'Tidak ada' }}
-                                        </span>
-                                    </div>
-
-                                    <span
-                                        class="px-3 py-1 text-xs rounded-full font-medium 
-                                    {{ $absensi->status_pulang == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                                        {{ $absensi->status_pulang == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">
-                                        @if ($absensi->jam_masuk && $absensi->jam_pulang)
-                                            @php
-                                                $start = \Carbon\Carbon::parse($absensi->jam_masuk);
-                                                $end = \Carbon\Carbon::parse($absensi->jam_pulang);
-                                                $duration = $start->diff($end);
-                                            @endphp
-                                            {{ $duration->h }}h {{ $duration->i }}m
-                                        @else
-                                            -
-                                        @endif
-                                    </div>
-                                </td>
-                                {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-3 py-1 text-xs rounded-full font-medium 
-                                    {{ $absensi->status_masuk == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                                        {{ $absensi->status_masuk == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
-                                    </span>
-                                </td> --}}
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @if ($absensi->bukti_diupload)
-                                        <div class="flex items-center text-green-600">
-                                            <i class="fas fa-check-circle mr-1"></i>
-                                            <span class="text-sm">Uploaded</span>
-                                        </div>
-                                    @else
-                                        <div class="flex items-center text-gray-400">
-                                            <i class="fas fa-times-circle mr-1"></i>
-                                            <span class="text-sm">Belum</span>
-                                        </div>
-                                    @endif
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    @if ($absensi->bukti_pekerjaan)
-                                        <a href="{{ asset('storage/' . $absensi->bukti_pekerjaan) }}" target="_blank"
-                                            class="text-purple-600 hover:text-purple-900">
-                                            <i class="fas fa-download"></i>
-                                        </a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            @if ($riwayatAbsensi->isEmpty())
-                <div class="text-center py-12">
-                    <i class="fas fa-calendar-times text-gray-300 text-5xl mb-4"></i>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak ada riwayat absensi</h3>
-                    <p class="text-gray-500">Riwayat absensi akan muncul setelah Anda melakukan absensi</p>
-                </div>
-            @endif
-        </div>
-
         <!-- Footer -->
         <footer class="mt-12 pt-8 border-t border-gray-200">
             <div class="flex flex-col md:flex-row justify-between items-center">
