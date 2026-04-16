@@ -33,10 +33,10 @@
                             <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mr-3">
                                 <i class="fas fa-calendar-check text-white text-xl"></i>
                             </div>
-                            <span class="text-2xl font-bold text-gray-800">Absensi<span
-                                    class="text-purple-600">WFA</span></span>
+                            <span class="text-2xl font-bold text-gray-800">Polsub<span
+                                    class="text-purple-600">Attendance</span></span>
                         </a>
-                        <p class="text-gray-600 mt-2">Sistem Absensi Work From Anywhere</p>
+                        <p class="text-gray-600 mt-2">Smart Attendance Management System</p>
                     </div>
 
                     <h2 class="text-3xl font-bold text-gray-800 mb-2">Masuk ke Akun Anda</h2>
@@ -79,7 +79,7 @@
                             </label>
                             <div class="relative">
                                 <input id="email" type="email" name="email" value="{{ old('email') }}" required
-                                    autofocus placeholder="nama@perusahaan.com"
+                                    autofocus placeholder="nama@polsub.co.id"
                                     class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg input-focus focus:border-purple-500 focus:outline-none transition duration-200">
                                 <div class="absolute left-0 top-0 h-full flex items-center px-4 text-gray-400">
                                     <i class="fas fa-user-circle"></i>
@@ -132,7 +132,7 @@
                         <div class="text-center">
                             <p class="text-gray-600 text-sm">
                                 <i class="fas fa-info-circle mr-2 text-blue-500"></i>
-                                Pastikan Anda menggunakan email perusahaan yang terdaftar
+                                Pastikan Anda menggunakan email kampus yang terdaftar
                             </p>
                             <p class="text-gray-600 text-sm mt-2">
                                 <i class="fas fa-clock mr-2 text-yellow-500"></i>
@@ -145,7 +145,7 @@
                 <!-- Right Side - Information -->
                 <div class="md:w-1/2 bg-gradient-custom text-white p-8 md:p-12 flex flex-col justify-center">
                     <div class="max-w-md mx-auto">
-                        <h3 class="text-2xl font-bold mb-6">Sistem Absensi WFA</h3>
+                        <h3 class="text-2xl font-bold mb-6">Polsub Attendance</h3>
 
                         <div class="space-y-6">
                             <div class="flex items-start">
@@ -210,7 +210,7 @@
                             <p class="text-sm">
                                 <i class="fas fa-headset mr-2"></i>
                                 Butuh bantuan?
-                                <a href="mailto:it-support@perusahaan.com" class="underline hover:text-white">Hubungi
+                                <a href="mailto:upatik@polsub.co.id" class="underline hover:text-white">Hubungi
                                     IT Support</a>
                             </p>
                         </div>
@@ -225,7 +225,7 @@
                 <span class="text-purple-600 font-medium">v1.0</span>
             </p>
             <p class="text-gray-500 text-xs mt-1">
-                Hak Cipta Dilindungi. Penggunaan sistem ini tunduk pada ketentuan perusahaan.
+                Hak Cipta Dilindungi. Penggunaan sistem ini tunduk pada ketentuan kampus.
             </p>
         </div>
     </div>

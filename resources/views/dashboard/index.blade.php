@@ -97,7 +97,7 @@
                         </div>
                         <div>
                             <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Dashboard Absensi</h1>
-                            <p class="text-gray-600 text-sm">Work From Anywhere System</p>
+                            <p class="text-gray-600 text-sm">Smart Attendance Management System</p>
                         </div>
                     </div>
 
@@ -864,9 +864,9 @@
                         <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
                             <i class="fas fa-calendar-check text-white"></i>
                         </div>
-                        <span class="text-lg font-bold text-gray-800">AbsensiWFA</span>
+                        <span class="text-lg font-bold text-gray-800">Polsub Attendance</span>
                     </div>
-                    <p class="text-sm text-gray-600">Sistem Absensi Work From Anywhere © {{ date('Y') }}</p>
+                    <p class="text-sm text-gray-600">Smart Attendance Management System © {{ date('Y') }}</p>
                 </div>
 
                 <div class="flex items-center space-x-6">
