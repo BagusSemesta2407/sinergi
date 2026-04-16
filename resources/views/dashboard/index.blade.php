@@ -410,15 +410,7 @@
                                 <i class="fas fa-exclamation-circle mr-1"></i>
                                 Tidak bisa absen pulang
                             </p>
-                            @if ($alasanTidakBisaPulang)
-                                <p class="text-xs text-amber-600">
-                                    {{ $alasanTidakBisaPulang }}
-                                </p>
-                            @else
-                                <p class="text-xs text-amber-600">
-                                    Cek kembali waktu absen pulang
-                                </p>
-                            @endif
+                            
                         </div>
                     @endif
                 </div>
@@ -757,13 +749,13 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Tanggal</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Check-in</th>
+                                Masuk</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Check-out</th>
+                                Pulang</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Durasi</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Status</th>
+                            {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status</th> --}}
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Bukti</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -786,6 +778,11 @@
                                             {{ $absensi->jam_masuk ?: 'Tidak ada' }}
                                         </span>
                                     </div>
+                                    <span
+                                        class="px-3 py-1 text-xs rounded-full font-medium 
+                                    {{ $absensi->status_masuk == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                        {{ $absensi->status_masuk == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -795,6 +792,12 @@
                                             {{ $absensi->jam_pulang ?: 'Tidak ada' }}
                                         </span>
                                     </div>
+
+                                    <span
+                                        class="px-3 py-1 text-xs rounded-full font-medium 
+                                    {{ $absensi->status_pulang == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                        {{ $absensi->status_pulang == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
@@ -810,13 +813,13 @@
                                         @endif
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                {{-- <td class="px-6 py-4 whitespace-nowrap">
                                     <span
                                         class="px-3 py-1 text-xs rounded-full font-medium 
                                     {{ $absensi->status_masuk == 'tepat_waktu' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
                                         {{ $absensi->status_masuk == 'tepat_waktu' ? 'Tepat Waktu' : 'Terlambat' }}
                                     </span>
-                                </td>
+                                </td> --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @if ($absensi->bukti_diupload)
                                         <div class="flex items-center text-green-600">
