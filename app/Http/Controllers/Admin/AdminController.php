@@ -168,41 +168,43 @@ class AdminController extends Controller
     {
         $query = Absensi::with('user', 'sesiAbsensi');
 
-        // Filter berdasarkan tanggal
-        if ($request->has('start_date') && $request->has('end_date')) {
-            $query->whereBetween('tanggal', [
-                $request->start_date,
-                $request->end_date
-            ]);
-        } elseif ($request->has('date')) {
+        // 1. Filter Berdasarkan Tanggal (Hanya jika ada input tanggal)
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('tanggal', [$request->start_date, $request->end_date]);
+        } elseif ($request->filled('date')) {
             $query->whereDate('tanggal', $request->date);
-        } else {
-            // Default: 30 hari terakhir
-            $query->where('tanggal', '>=', Carbon::today()->subDays(30));
+        }
+        // 2. Jika TIDAK sedang mencari (search) dan TIDAK ada filter user, baru gunakan default 30 hari
+        elseif (!$request->filled('search') && !$request->filled('user_id')) {
+            $query->where('tanggal', '>=', now()->subDays(30));
         }
 
-        // Filter berdasarkan user
-        if ($request->has('user_id')) {
+        // 3. Search (Gunakan grouping agar pencarian name/email tidak merusak filter lain)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($mainQuery) use ($search) {
+                $mainQuery->whereHas('user', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                })
+                    // Tambahkan ini jika ingin mencari di kolom catatan tabel absensi juga
+                    ->orWhere('catatan', 'like', "%{$search}%");
+            });
+        }
+
+        // 4. Filter lainnya tetap sama
+        if ($request->filled('user_id')) {
             $query->where('user_id', $request->user_id);
         }
 
-        // Filter berdasarkan status
-        if ($request->has('status_masuk')) {
+        if ($request->filled('status_masuk')) {
             $query->where('status_masuk', $request->status_masuk);
-        }
-
-        // Search
-        if ($request->has('search')) {
-            $search = $request->search;
-            $query->whereHas('user', function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
-            });
         }
 
         $attendance = $query->orderBy('tanggal', 'desc')
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(20)
+            ->withQueryString(); // Sangat penting agar pagination tidak hilang saat difilter
 
         $users = User::where('role', 'user')->get();
 

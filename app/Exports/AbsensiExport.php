@@ -14,32 +14,33 @@ class AbsensiExport implements FromCollection, WithHeadings, WithMapping, WithSt
     protected $startDate;
     protected $endDate;
     protected $userId;
-    
+
     public function __construct($startDate = null, $endDate = null, $userId = null)
     {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->userId = $userId;
     }
-    
+
     public function collection()
     {
-        $query = Absensi::with('user', 'sesiAbsensi');
-        
+        $query = Absensi::with('user','sesiAbsensi','user.employee')->whereHas('user.employee');;
+
         if ($this->startDate && $this->endDate) {
             $query->whereBetween('tanggal', [$this->startDate, $this->endDate]);
         }
-        
+
         if ($this->userId) {
             $query->where('user_id', $this->userId);
         }
-        
+
         return $query->orderBy('tanggal', 'desc')->get();
     }
-    
+
     public function headings(): array
     {
         return [
+            'NIP/NIK',
             'Nama',
             'Email',
             'Tanggal',
@@ -47,6 +48,8 @@ class AbsensiExport implements FromCollection, WithHeadings, WithMapping, WithSt
             'Jam Pulang',
             'Status Masuk',
             'Status Pulang',
+            'Jabatan',
+            'Department',
             'Lokasi Masuk',
             'Lokasi Pulang',
             'Bukti Upload',
@@ -56,17 +59,20 @@ class AbsensiExport implements FromCollection, WithHeadings, WithMapping, WithSt
             'Waktu Update'
         ];
     }
-    
+
     public function map($absensi): array
     {
         return [
+            "`".$absensi->user->employee->employee_number,
             $absensi->user->name,
             $absensi->user->email,
             $absensi->tanggal->format('d/m/Y'),
-            $absensi->jam_masuk ?? '-',
-            $absensi->jam_pulang ?? '-',
+            $absensi->jam_masuk ? \Carbon\Carbon::parse($absensi->jam_masuk)->format('H:i:s') : '-',
+            $absensi->jam_pulang ? \Carbon\Carbon::parse($absensi->jam_pulang)->format('H:i:s') : '-',
             $this->getStatusLabel($absensi->status_masuk),
             $this->getStatusLabel($absensi->status_pulang),
+            $absensi->user->employee->position,
+            $absensi->user->employee->department,
             $absensi->lokasi_masuk ?? '-',
             $absensi->lokasi_pulang ?? '-',
             $absensi->bukti_diupload ? 'Ya' : 'Tidak',
@@ -75,8 +81,8 @@ class AbsensiExport implements FromCollection, WithHeadings, WithMapping, WithSt
             $absensi->created_at->format('d/m/Y H:i:s'),
             $absensi->updated_at->format('d/m/Y H:i:s'),
         ];
-    }
-    
+    }   
+
     private function getStatusLabel($status)
     {
         $labels = [
@@ -85,16 +91,16 @@ class AbsensiExport implements FromCollection, WithHeadings, WithMapping, WithSt
             'cepat' => 'Cepat',
             'tidak_absen' => 'Tidak Absen'
         ];
-        
+
         return $labels[$status] ?? $status;
     }
-    
+
     public function styles(Worksheet $sheet)
     {
         return [
             // Style the first row as bold text
             1 => ['font' => ['bold' => true]],
-            
+
             // Set column widths
             'A' => ['width' => 25],
             'B' => ['width' => 30],
